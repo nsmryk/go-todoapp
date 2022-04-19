@@ -18,12 +18,12 @@ func DBConnection() *sql.DB {
 	//TODO: an error happens here.
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(fmt.Errorf("DB Error: %w", err))
+		panic(fmt.Errorf("DB Error1: %w", err))
 	}
 	CreateTable(db)
 	sqlDB, err := db.DB()
 	if err != nil {
-		panic(fmt.Errorf("DB Error: %w", err))
+		panic(fmt.Errorf("DB Error2: %w", err))
 	}
 	return sqlDB
 }
@@ -35,7 +35,7 @@ func GetDBConfig() string {
 	port := os.Getenv("DB_PORT")
 	dbname := os.Getenv("DB_DBNAME")
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s)", user, password, hostname, port, dbname) + "?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", user, password, hostname, port, dbname) + "?charset=utf8mb4&parseTime=True&loc=Local"
 	return dsn
 }
 

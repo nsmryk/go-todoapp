@@ -16,3 +16,20 @@ func GetTasks() ([]Task, error) {
 	err := db.Find(&tasks).Error
 	return tasks, err
 }
+
+func AddTask(name string) (*Task, error) {
+	id, err := uuid.NewUUID()
+	if err != nil {
+		return nil, err
+	}
+
+	task := Task{
+		ID:         id,
+		Name:       name,
+		IsFinished: false,
+	}
+
+	err = db.Create(&task).Error
+
+	return &task, err
+}
