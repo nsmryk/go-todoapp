@@ -33,3 +33,13 @@ func AddTask(name string) (*Task, error) {
 
 	return &task, err
 }
+
+func ChangeFinishedTask(taskID uuid.UUID) error {
+	err := db.Model(&Task{}).Where("id = ?", taskID).Update("IsFinished", true).Error
+	return err
+}
+
+func DeleteTask(taskID uuid.UUID) error {
+	err := db.Where("id = ?", taskID).Delete(&Task{}).Error
+	return err
+}
