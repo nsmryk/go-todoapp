@@ -1,11 +1,15 @@
 package main
 
-import "github.com/labstack/echo/v4"
+import (
+	"todo-app/model"
+	"todo-app/router"
+
+	"github.com/labstack/echo/v4"
+)
 
 func main() {
+	sqlDB := model.DBConnection()
+	defer sqlDB.Close()
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(200, "Hello World!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
+	router.SetRouter(e)
 }
