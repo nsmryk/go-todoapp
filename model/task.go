@@ -6,9 +6,9 @@ import (
 )
 
 type Task struct {
-	ID         uuid.UUID
-	Name       string
-	IsFinished bool
+	ID         uuid.UUID `json:"id"`
+	Name       string `json:"name"`
+	IsFinished bool `json:"isfinished"`
 }
 
 func GetTasks() ([]Task, error) {
