@@ -18,7 +18,7 @@ func GetTasksHandler(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "Bad Request")
 	}
 
-	return c.Render(http.StatusOK, "tasks.html", tasks)
+	return c.JSON(http.StatusOK, tasks)
 }
 
 func AddTaskHandler(c echo.Context) error {

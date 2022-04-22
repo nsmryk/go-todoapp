@@ -20,6 +20,7 @@ class Todo extends React.Component {
     return http
       .get('/api/tasks')
       .then((response) => {
+        console.log(response.data)
         this.setState({ lists: response.data })
       })
       .catch(error => {
