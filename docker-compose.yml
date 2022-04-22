@@ -4,7 +4,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/golang/Dockerfile
     container_name: server
     environment:
       TZ: Asia/Tokyo
@@ -15,27 +15,38 @@ services:
       DB_DBNAME: todolist
     tty: true
     volumes:
-      - ./:/app/todo-app
+      - ./go-app:/app/todo-app
     ports:
       - "8000:8000"
     depends_on:
       - mysql
-    
+  react:
+    build:
+      context: .
+      dockerfile: ./docker/react/Dockerfile
+    container_name: react_container
+    tty: true
+    volumes:
+      - ./react-app/react-app:/app/react
+    command: sh -c "cd /app/react && yarn install && yarn start"
+    ports:
+      - 3000:3000
+
   mysql:
     image: mysql:latest
-    container_name: mysql
+    container_name: mysql_todo
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: todolist
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - ./go-app/mysql/data:/var/lib/mysql
     expose:
       - "3306"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin_todo
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: mysql
