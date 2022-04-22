@@ -7,7 +7,7 @@ class Todo extends React.Component {
   constructor() {
     super();
     this.state = {
-      text: "",
+      name: "",
       lists: [],
     }
   }
@@ -29,19 +29,19 @@ class Todo extends React.Component {
   }
 
   handleChange = e => {
-    this.setState({ text: e.target.value })
+    this.setState({ name: e.target.value })
   }
 
   handleSubmit = () => {
-    if (this.state.text === "") {
+    if (this.state.name === "") {
       return window.alert("入力してください")
     }
     return http
       .post('/api/tasks', {
-        text: this.state.text
+        name: this.state.name
       })
       .then(() => {
-        this.setState({ text: "" });
+        this.setState({ name: "" });
         this.getTodoList();
       }
       )
@@ -50,6 +50,17 @@ class Todo extends React.Component {
       })
   }
 
+  handleDelete = (list) => {
+    return http
+      .delete(`/api/tasks/${list.id}`)
+      .then(() =>
+        this.getTodoList()
+      )
+      .catch(error => {
+        console.log(error)
+      }
+  }
+  
   handleDelete = (list) => {
     return http
       .delete(`/api/tasks/${list.id}`)
@@ -68,13 +79,14 @@ class Todo extends React.Component {
           <h1>Todo</h1>
         </div>
         <InputField
-          text={this.state.text}
+          name={this.state.name}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
         <List
           lists={this.state.lists}
           handleDelete={this.handleDelete}
+          handleChange={this.handleChangeFinish}
         />
       </div>
     )

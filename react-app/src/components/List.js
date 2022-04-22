@@ -5,8 +5,21 @@ export default function List(props) {
     <div>
         <h1>ToDo List</h1>
         <ul>
-            { props.lists.map(todo => (
-            <li>{ todo.name }: {todo.isfinished} </li>
+            { props.lists.map((todo, index) => (
+            <li
+                key={index}
+                style={{
+                textDecoration: todo.isfinished ? 'line-through' : 'none',
+                }}
+            >
+            { todo.name }: { todo.isfinished } 
+            <input
+                type="checkbox"
+                checked={todo.isfinished}
+                onChange={() => props.handleDelete(todo)}
+            />
+            <span onClick={ () => props.handleChange(todo) }>done</span>
+            </li>
             ))}
         </ul>
     </div>
