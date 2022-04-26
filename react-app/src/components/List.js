@@ -16,9 +16,11 @@ export default function List(props) {
             <input
                 type="checkbox"
                 checked={todo.isfinished}
-                onChange={() => props.handleDelete(todo)}
+                onChange={() => props.handleChangeFinish(todo)}
             />
-            <span onClick={ () => props.handleChange(todo) }>done</span>
+            <button onClick={() => props.handleDelete(todo)}>
+              DELETE
+            </button>
             </li>
             ))}
         </ul>

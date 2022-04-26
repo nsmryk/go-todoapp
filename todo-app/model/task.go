@@ -35,7 +35,9 @@ func AddTask(name string) (*Task, error) {
 }
 
 func ChangeFinishedTask(taskID uuid.UUID) error {
-	err := db.Model(&Task{}).Where("id = ?", taskID).Update("IsFinished", true).Error
+	var task Task
+	err := db.Where("id = ?", taskID).Find(&task).Error
+	err = db.Model(&Task{}).Where("id = ?", taskID).Update("IsFinished", !task.IsFinished).Error
 	return err
 }
 

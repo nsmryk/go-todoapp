@@ -50,15 +50,15 @@ class Todo extends React.Component {
       })
   }
 
-  handleDelete = (list) => {
+  handleChangeFinish = (list) => {
     return http
-      .delete(`/api/tasks/${list.id}`)
+      .put(`/api/tasks/${list.id}`)
       .then(() =>
         this.getTodoList()
       )
       .catch(error => {
         console.log(error)
-      }
+      })
   }
   
   handleDelete = (list) => {
@@ -86,7 +86,7 @@ class Todo extends React.Component {
         <List
           lists={this.state.lists}
           handleDelete={this.handleDelete}
-          handleChange={this.handleChangeFinish}
+          handleChangeFinish={this.handleChangeFinish}
         />
       </div>
     )
