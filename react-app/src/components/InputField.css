@@ -1,0 +1,8 @@
+.add-button {
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: none; 
+    text-decoration: none;
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.7rem;
+}

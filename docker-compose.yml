@@ -15,7 +15,7 @@ services:
       DB_DBNAME: todolist
     tty: true
     volumes:
-      - ./go-app:/app/todo-app
+      - ./todo-app/:/app/todo-app
     ports:
       - "8000:8000"
     depends_on:
@@ -27,11 +27,10 @@ services:
     container_name: react_container
     tty: true
     volumes:
-      - ./react-app/react-app:/app/react
+      - ./react-app/:/app/react
     command: sh -c "cd /app/react && yarn install && yarn start"
     ports:
       - 3000:3000
-
   mysql:
     image: mysql:latest
     container_name: mysql_todo
@@ -41,7 +40,7 @@ services:
       MYSQL_DATABASE: todolist
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     volumes:
-      - ./go-app/mysql/data:/var/lib/mysql
+      - ./todo-app/mysql/data:/var/lib/mysql
     expose:
       - "3306"
   phpmyadmin:

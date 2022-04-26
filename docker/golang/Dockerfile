@@ -1,6 +1,6 @@
-FROM golang:alpine
-RUN apk update
-RUN apk add alpine-sdk
-COPY ./go-app /app/todo-app
+
+FROM golang:1.17-alpine as server-build
+
 WORKDIR /app/todo-app
-RUN go build -o main .
+
+COPY /todo-app /app/todo-app

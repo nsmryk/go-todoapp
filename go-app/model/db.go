@@ -15,7 +15,6 @@ var db *gorm.DB
 func DBConnection() *sql.DB {
 	dsn := GetDBConfig()
 	var err error
-	//TODO: an error happens here.
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(fmt.Errorf("DB Error1: %w", err))
