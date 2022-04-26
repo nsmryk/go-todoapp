@@ -2,6 +2,7 @@ import React from 'react';
 import InputField from './InputField';
 import List from './List';
 import http from './http';
+import './Todos.css';
 
 class Todo extends React.Component {
   constructor() {
@@ -76,7 +77,7 @@ class Todo extends React.Component {
     return (
       <div className="todo">
         <div className="todo-title">
-          <h1>Todo</h1>
+          <h1 >TODO</h1>
         </div>
         <InputField
           name={this.state.name}
