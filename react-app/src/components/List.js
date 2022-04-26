@@ -1,6 +1,5 @@
 import React from 'react';
 import './List.css'
-let btn = { cursor: 'pointer' }
 export default function List(props) {
   return (
     <div>
